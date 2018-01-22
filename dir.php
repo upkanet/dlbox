@@ -42,7 +42,24 @@ class Dir
 			$f = new File($fa,$this->path.'/'.$fa,$this->basedir);
 			array_push($this->files, $f);
 		}
+		$this->sortFiles();
 
+	}
+
+	private function sortFiles(){
+		$dirs = [];
+		$files = [];
+		foreach($this->files as $f){
+			if($f->isdir){
+				array_push($dirs,$f);
+			}
+			else{
+				array_push($files,$f);
+			}
+		}
+		asort($dirs);
+		asort($files);
+		$this->files = array_merge($dirs, $files);
 	}
 
 
