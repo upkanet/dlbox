@@ -26,6 +26,7 @@
 	<div id="AlertArea"></div>
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
+			<li class="breadcrumb-item"></li>
 			@foreach($directory->nav as $d => $sp)
 				@if($d == $directory->name)
 				<li class="breadcrumb-item active" aria-current="page">{{$d}}</li>
