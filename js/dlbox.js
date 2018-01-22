@@ -17,4 +17,17 @@ $(function(){
 	$("#VideoModal").on('hidden.bs.modal', function () {
 		$('#videosection').html('');
 	});
+
+	$("#AddMagnetBtn").click(function(){
+		var mag = prompt("Add Magnet");
+		$.getJSON("magnet.php?magnet="+mag, function(data){
+			sendAlert(data.type, data.message);
+		});
+	});
 });
+
+
+function sendAlert(type,message){
+	$("#AlertArea").html('<div id="AlertBox" class="alert alert-'+type+'">'+message+'</div>');
+	$("#AlertBox").animate({"opacity":"toggle"},1500);
+}

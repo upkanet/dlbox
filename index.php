@@ -13,10 +13,10 @@ $path = $_GET['dir'] ?? null;
 
 $directory = new Dir($path);
 
-$message = null;
+$alert = null;
 
 if(isset($_GET['del'])){
-	$message = $directory->del($_GET['del']);
+	$alert = $directory->del($_GET['del']);
 	$directory->loadFiles();
 }
-echo $blade->make('homepage', ['directory' => $directory, 'message' => $message]);
+echo $blade->make('homepage', ['directory' => $directory, 'alert' => $alert]);

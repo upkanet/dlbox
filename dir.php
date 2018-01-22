@@ -84,16 +84,16 @@ class Dir
 			$info = pathinfo($path);
 			$f = new File($info['filename'],$path, $this->basedir);
 			if($f->del()){
-				$m = ["type" => "secondary", "val" => $f->basename." deteled"];
+				$a = ["type" => "success", "message" => $f->basename." deteled"];
 			}
 			else{
-				$m = ["type" => "danger", "val" => "Unable to delete ".$f->basename];
+				$a = ["type" => "danger", "message" => "Unable to delete ".$f->basename];
 			}
 		}
 		else{
-			$m = ["type" => "danger", "val" => "Deletion error"];
+			$a = ["type" => "danger", "message" => "Deletion error"];
 		}
-		return $m;
+		return $a;
 	}
 
 }

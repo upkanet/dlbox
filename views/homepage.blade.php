@@ -12,9 +12,18 @@
 @endsection
 
 @section('content')
-	@if(isset($message))
-	<div class="alert alert-{{$message['type']}}" role="alert">{{$message['val']}}</div>
+	<button id="AddMagnetBtn" class="btn btn-primary">Add Magnet</button><a class="btn btn-primary" href="{{$_SERVER['HTTP_HOST']}}:8112" target="_blank">Deluge</a>
+	@if(isset($alert))
+	@section('js')
+		@parent
+		<script>
+			$(function(){
+				sendAlert("{{$alert['type']}}", "{{$alert['message']}}");
+			});
+		</script>
+	@endsection
 	@endif
+	<div id="AlertArea"></div>
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			@foreach($directory->nav as $d => $sp)
