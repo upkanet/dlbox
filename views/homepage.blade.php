@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-	<button id="AddMagnetBtn" class="btn btn-primary">Add Magnet</button><a class="btn btn-primary" href="{{$_SERVER['HTTP_HOST']}}:8112" target="_blank">Deluge</a>
+	<button id="AddMagnetBtn" class="btn btn-primary">Add Magnet</button><a class="btn btn-primary" href="http://{{$_SERVER['HTTP_HOST']}}:8112" target="_blank">Deluge</a>
 	@if(isset($alert))
 	@section('js')
 		@parent
