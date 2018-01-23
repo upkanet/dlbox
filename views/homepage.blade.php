@@ -75,7 +75,7 @@
 @endsection
 
 @section('footer')
-<a href="login-form.php">Log Out</a> | DLBox &copy;2018
+<a href="login-form.php">Log Out</a> | {{$freespace}} | DLBox &copy;2018
 @endsection
 
 @section('js')
