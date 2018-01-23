@@ -1,4 +1,5 @@
 <?php
+require 'login-check.php';
 
 $action = $_GET['action'] 
 	or exit("No action specified");
