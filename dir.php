@@ -11,6 +11,7 @@ class Dir
 	private $basedir;
 	public $isbasedir = false;
 	public $nav = [];
+	public $shortnav = [];
 
 	public function __construct($path){
 		global $_CONFIG;
@@ -26,7 +27,7 @@ class Dir
 		$this->shortpath = $this->basedir.str_replace(realpath($this->basedir),"",$this->path);
 
 		$this->name = basename($this->path);
-		$this->nav = $this->getNav();
+		$this->getNav();
 		$this->isbasedir = ($this->path == realpath($this->basedir));
 		
 		$this->loadFiles();
@@ -70,12 +71,20 @@ class Dir
 	private function getNav(){
 		$arr = explode('/',$this->shortpath);
 		$nav = [];
+		$snav = [];
 		$sp = "";
 		foreach($arr as $d){
 			$sp .= "/".$d;
 			$nav[$d] = substr($sp,1);
+			if(strlen($d)>10){
+				$snav[substr($d,0,10)."..."] = substr($sp,1);
+			}
+			else{
+				$snav[$d] = substr($sp,1);
+			}
 		}
-		return $nav;
+		$this->nav = $nav;
+		$this->shortnav = $snav;
 	}
 
 	public function del($shortpath){
