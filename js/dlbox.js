@@ -18,12 +18,7 @@ $(function(){
 		$('#videosection').html('');
 	});
 
-	$("#AddMagnetBtn").click(function(){
-		var mag = prompt("Add Magnet");
-		$.getJSON("magnet.php?magnet="+mag, function(data){
-			sendAlert(data.type, data.message);
-		});
-	});
+	$("#AddMagnetBtn").click(addMagnet);
 
 	(function(){
 		updateTorList();
@@ -37,9 +32,26 @@ function sendAlert(type,message){
 	$("#AlertBox").animate({"opacity":"toggle"},1500);
 }
 
+function addMagnet(){
+	var mag = prompt("Add Magnet");
+	if(mag != "" && mag != null){
+		$.getJSON("tor.php?action=add&magnet="+mag, function(data){
+			sendAlert(data.type, data.message);
+		});
+	}
+}
+
+function deleteMagnet(id,name){
+	if(confirm('Do you really want to delete '+name+' torrent')){
+		$.getJSON("tor.php?action=delete&id="+id, function(data){
+			sendAlert(data.type, data.message);
+		});
+	}
+}
+
 function updateTorList(){
 	var table = $("#TorList");
-	$.getJSON("torlist.php",function(tors){
+	$.getJSON("tor.php?action=list",function(tors){
 		var str = '';
 		tors.forEach(function(t){
 			str += '<tr>';
@@ -60,7 +72,7 @@ function updateTorList(){
 			str += '</td>';
 			str += '<td width="150"><div class="progress"><div class="progress-bar" role="progressbar" style="width: '+t.Progress+'%">'+t.Progress+'%</div></div></td>';
 			str += '<td width="100">'+t.tSize+'</td>';
-			str += '<td><a href="deltor.php?id='+t.ID+'"><span class="oi oi-delete"></span></a></td>';
+			str += '<td><a href="javascript:deleteMagnet(\''+t.ID+'\',\''+t.Name+'\');"><span class="oi oi-delete"></span></a></td>';
 			str += '</tr>';
 		});
 		table.html("");
