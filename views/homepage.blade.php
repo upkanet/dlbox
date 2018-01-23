@@ -12,7 +12,8 @@
 @endsection
 
 @section('content')
-	<button id="AddMagnetBtn" class="btn btn-primary">Add Magnet</button><a class="btn btn-primary" href="http://{{$_SERVER['HTTP_HOST']}}:8112" target="_blank">Deluge</a>
+	<button id="AddMagnetBtn" class="btn btn-primary">Add Magnet</button> 
+	<button id="DownloadsBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#DownloadList">Downloads</button> 
 	@if(isset($alert))
 	@section('js')
 		@parent
@@ -24,9 +25,12 @@
 	@endsection
 	@endif
 	<div id="AlertArea"></div>
-
-	<table class="table table-striped" id="TorList">
-	</table>
+	
+	<div class="collapse" id="DownloadList">
+		<a href="http://{{$_SERVER['HTTP_HOST']}}:8112" target="_blank">Deluge</a>
+		<table class="table table-striped" id="TorList">
+		</table>
+	</div>
 
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">

@@ -40,7 +40,6 @@ function sendAlert(type,message){
 function updateTorList(){
 	var table = $("#TorList");
 	$.getJSON("torlist.php",function(tors){
-		console.log(tors);
 		var str = '';
 		tors.forEach(function(t){
 			str += '<tr>';
@@ -66,5 +65,6 @@ function updateTorList(){
 		});
 		table.html("");
 		table.append(str);
+		$('#DownloadsBtn').html('Downloads ('+tors.length+')');
 	});
 }
