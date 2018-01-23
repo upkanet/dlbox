@@ -108,6 +108,8 @@ class File
 	public $isdir = false;
 	public $extension = "";
 	public $size = 0;
+	public $istvshow = false;
+	public $tvshow = [];
 
 	public $type = null;
 	private $types = [
@@ -143,6 +145,7 @@ class File
 			$this->size = $this->filesize();
 			$this->type = $this->getType();
 			$this->icon = $this->getIcon();
+			$this->checkTVShow();
 		}
 	}
 
@@ -165,6 +168,16 @@ class File
 
 	private function getIcon(){
 		return $this->icons[$this->type] ?? "file";
+	}
+
+	private function checkTVShow(){
+		if ($this->type == "video" && preg_match("'^(.+)\.S([0-9]+)E([0-9]+).*$'i",$this->name,$n))
+		{
+			$this->istvshow = true;
+		    $this->tvshow["name"] = preg_replace("'\.'"," ",$n[1]);
+		    $this->tvshow["season"] = intval($n[2],10);
+		    $this->tvshow["episode"] = intval($n[3],10);
+		}
 	}
 
 	public function del(){

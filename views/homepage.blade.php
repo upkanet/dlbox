@@ -55,7 +55,11 @@
 			<td></td>
 			<td></td>
 		@else
-			<td><a href="{{$f->shortpath}}"><span class="oi oi-{{$f->icon}}"></span> {{$f->basename}}</a></td>
+			@if($f->istvshow)
+				<td><a href="{{$f->shortpath}}" title="{{$f->basename}}"><span class="oi oi-{{$f->icon}}"></span> {{$f->tvshow['name']}} {{$f->tvshow['season']}}x{{$f->tvshow['episode']}}</a></td>
+			@else
+				<td><a href="{{$f->shortpath}}"><span class="oi oi-{{$f->icon}}"></span> {{$f->basename}}</a></td>
+			@endif
 			<td>
 			@if($f->type == "video")
 				<a href="javascript:showVideo('{{$f->shortpath}}');"><span class="oi oi-video"></span> Watch</a>
