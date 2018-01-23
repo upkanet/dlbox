@@ -45,20 +45,18 @@
 		</ol>
 	</nav>
 
-
-
 	<table class="table table-striped">
 	@foreach($directory->files as $f)
 		<tr>
 		@if($f->isdir)
-			<td><a href="?dir={{$directory->shortpath}}/{{$f->name}}"><span class="oi oi-folder"></span> {{$f->name}}</a></td>
+			<td><a href="?dir={{$directory->shortpath}}/{{$f->name}}"><span class="oi oi-folder"></span> <span class="d-none d-md-inline">{{$f->basename}}</span><span class="d-inline d-md-none">{{$f->shortname}}</span></a></td>
 			<td></td>
 			<td></td>
 		@else
 			@if($f->istvshow)
 				<td><a href="{{$f->shortpath}}" title="{{$f->basename}}"><span class="oi oi-{{$f->icon}}"></span> {{$f->tvshow['name']}} {{$f->tvshow['season']}}x{{$f->tvshow['episode']}}</a></td>
 			@else
-				<td><a href="{{$f->shortpath}}"><span class="oi oi-{{$f->icon}}"></span> {{$f->basename}}</a></td>
+				<td><a href="{{$f->shortpath}}"><span class="oi oi-{{$f->icon}}"></span> <span class="d-none d-md-inline">{{$f->basename}}</span><span class="d-inline d-md-none">{{$f->shortname}}</span></a></td>
 			@endif
 			<td>
 			@if($f->type == "video")

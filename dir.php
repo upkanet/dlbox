@@ -102,6 +102,7 @@ class File
 {
 	public $name;
 	public $basename;
+	public $shortname;
 	public $path;
 	private $basedir;
 	public $shortpath;
@@ -133,6 +134,12 @@ class File
 	public function __construct($name,$path,$basedir){
 		$this->name = $name;
 		$this->basename = $this->name;
+		if(strlen($this->name)>25){
+			$this->shortname = substr($this->name,0,25)."[-]";
+		}
+		else{
+			$this->shortname = $this->name;
+		}
 		$this->path = realpath($path);
 		$this->basedir = $basedir;
 		$this->shortpath = $this->basedir . str_replace(realpath($this->basedir), "", $this->path);
@@ -142,6 +149,7 @@ class File
 			$this->name = $info['filename'];
 			$this->extension = $info['extension'];
 			$this->basename = $this->name.".".$this->extension;
+			$this->shortname = $this->shortname.".".$this->extension;
 			$this->size = $this->filesize();
 			$this->type = $this->getType();
 			$this->icon = $this->getIcon();
