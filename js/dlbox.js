@@ -32,21 +32,31 @@ function sendAlert(type,message){
 	$("#AlertBox").animate({"opacity":"toggle"},1500);
 }
 
+function actionMagnet(actionparam){
+	$.getJSON("tor.php?action="+actionparam, function(data){
+		sendAlert(data.type, data.message);
+	});
+}
+
 function addMagnet(){
 	var mag = prompt("Add Magnet");
 	if(mag != "" && mag != null){
-		$.getJSON("tor.php?action=add&magnet="+mag, function(data){
-			sendAlert(data.type, data.message);
-		});
+		actionMagnet('add&magnet='+mag);
 	}
 }
 
 function deleteMagnet(id,name){
 	if(confirm('Do you really want to delete '+name+' torrent')){
-		$.getJSON("tor.php?action=delete&id="+id, function(data){
-			sendAlert(data.type, data.message);
-		});
+		actionMagnet('delete&id='+id);
 	}
+}
+
+function pauseMagnet(id){
+	actionMagnet('pause&id='+id);
+}
+
+function resumeMagnet(id){
+	actionMagnet('resume&id='+id);
 }
 
 function updateTorList(){
@@ -56,12 +66,15 @@ function updateTorList(){
 		tors.forEach(function(t){
 			str += '<tr>';
 			str += '<td>';
-			var playlink = '<a href="toggletor.php?id=' + t.ID + '&toggle=#TOGGLE#"><span class="oi oi-media-#ICON#"></span></a>';
+			var playlink = '<a href="javascript:#TOGGLE#Magnet(\'' + t.ID + '\');"><span class="oi oi-#ICON#"></span></a>';
 			if(t.State == "Paused"){
-				str += playlink.replace('#ICON#','pause').replace('#TOGGLE#','play');
+				str += playlink.replace('#ICON#','media-pause').replace('#TOGGLE#','resume');
 			}
-			else{
-				str += playlink.replace('#ICON#','play').replace('#TOGGLE#','pause');
+			if(t.State == "Checking"){
+				str += playlink.replace('#ICON#','reload').replace('#TOGGLE#','resume');
+			}
+			if(t.State == "Downloading"){
+				str += playlink.replace('#ICON#','media-play').replace('#TOGGLE#','pause');
 			}
 			str += '</td>';
 			str += '<td>'+t.Name+'</td>';

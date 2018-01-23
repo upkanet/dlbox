@@ -107,6 +107,18 @@ function fDelete($id){
 	alertMessage("success","Torrent deleted",true);
 }
 
+//Pause
+function fPause($id){
+	$shell = deluge('pause '.$id);
+	alertMessage("success","Torrent paused",true);
+}
+
+//Resume
+function fResume($id){
+	$shell = deluge('resume '.$id);
+	alertMessage("success","Torrent resumed",true);
+}
+
 //Helpers
 function alertMessage($type,$message,$json=false){
 	$a = ["type" => $type,"message" => $message];
