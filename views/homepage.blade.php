@@ -37,6 +37,10 @@
 		</ol>
 	</nav>
 
+	<table class="table table-striped" id="TorList">
+
+	</table>
+
 
 	<table class="table table-striped">
 	@foreach($directory->files as $f)
