@@ -24,6 +24,10 @@
 	@endsection
 	@endif
 	<div id="AlertArea"></div>
+
+	<table class="table table-striped" id="TorList">
+	</table>
+
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"></li>
@@ -37,9 +41,6 @@
 		</ol>
 	</nav>
 
-	<table class="table table-striped" id="TorList">
-
-	</table>
 
 
 	<table class="table table-striped">

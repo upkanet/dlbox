@@ -24,6 +24,11 @@ $(function(){
 			sendAlert(data.type, data.message);
 		});
 	});
+
+	(function(){
+		updateTorList();
+		setTimeout(arguments.callee, 3000);
+	})();
 });
 
 
@@ -34,17 +39,32 @@ function sendAlert(type,message){
 
 function updateTorList(){
 	var table = $("#TorList");
-	table.html("");
 	$.getJSON("torlist.php",function(tors){
+		console.log(tors);
+		var str = '';
 		tors.forEach(function(t){
-			var str = '<tr>';
-			str += '<td>'+t.State+'</td>';
+			str += '<tr>';
+			str += '<td>';
+			var playlink = '<a href="toggletor.php?id=' + t.ID + '&toggle=#TOGGLE#"><span class="oi oi-media-#ICON#"></span></a>';
+			if(t.State == "Paused"){
+				str += playlink.replace('#ICON#','pause').replace('#TOGGLE#','play');
+			}
+			else{
+				str += playlink.replace('#ICON#','play').replace('#TOGGLE#','pause');
+			}
+			str += '</td>';
 			str += '<td>'+t.Name+'</td>';
+			str += '<td width="100">';
+			if(typeof t["Down Speed"] != 'undefined'){
+				str += t["Down Speed"];
+			}
+			str += '</td>';
 			str += '<td width="150"><div class="progress"><div class="progress-bar" role="progressbar" style="width: '+t.Progress+'%">'+t.Progress+'%</div></div></td>';
-			str += '<td>'+t.tSize+'</td>';
-			str += '<td><a href="'+t.ID+'">Delete</a></td>';
+			str += '<td width="100">'+t.tSize+'</td>';
+			str += '<td><a href="deltor.php?id='+t.ID+'"><span class="oi oi-delete"></span></a></td>';
 			str += '</tr>';
-			table.append(str);
 		});
+		table.html("");
+		table.append(str);
 	});
 }
