@@ -24,6 +24,11 @@ $(function(){
 		updateTorList();
 		setTimeout(arguments.callee, 3000);
 	})();
+
+	console.log($('#AddMagnetInp').val());
+	if($('#AddMagnetInp').val() != ""){
+		$('#AddMagnet').collapse('show');
+	}
 });
 
 
@@ -39,7 +44,7 @@ function actionMagnet(actionparam){
 }
 
 function addMagnet(){
-	var mag = prompt("Add Magnet");
+	var mag = $('#AddMangetInp').val();
 	if(mag != "" && mag != null){
 		actionMagnet('add&magnet='+mag);
 	}

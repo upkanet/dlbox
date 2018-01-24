@@ -2,6 +2,12 @@
 
 @section('title',$directory->name)
 
+@section('topjs')
+<script type="text/javascript">
+	window.navigator.registerProtocolHandler("magnet","http://dl.jdlbox.com/?addmagnet=%s","JDLBox");
+</script>
+@endsection
+
 @section('css')
 	@parent
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -12,9 +18,9 @@
 @endsection
 
 @section('content')
-	<button id="AddMagnetBtn" class="btn btn-primary">Add Magnet</button> 
-	<button id="DownloadsBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#DownloadList">Downloads (0)</button> 
-	<button class="btn btn-primary">Load Subtitles</button> 
+	<button id="AddMagnetFormBtn" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#AddMagnet">Add Magnet</button> 
+	<button id="DownloadsBtn" class="btn btn-info" type="button" data-toggle="collapse" data-target="#DownloadList">Downloads (0)</button> 
+	<button class="btn btn-secondary">Load Subtitles</button> 
 	@if(isset($alert))
 	@section('js')
 		@parent
@@ -25,12 +31,37 @@
 		</script>
 	@endsection
 	@endif
-	<div id="AlertArea"></div>
+
+	<!-- Alerts -->
+	<div id="AlertArea" class="fixed-bottom container"></div>
 	
+	<!-- Add Magnet Collapse Form -->
+	<div class="collapse" id="AddMagnet">
+		<br>
+		<div class="card text-white bg-dark mb-3">
+			<div class="card-header">Add Magnet</div>
+			<div class="card-body">
+				<div class="input-group mb-3">
+					<input id="AddMagnetInp" type="text" class="form-control" placeholder="Magnet" aria-label="Magnet" aria-describedby="basic-addon2" value="{{$addmagnet}}">
+					<div class="input-group-append">
+						<button id="AddMagnetBtn" class="btn btn-outline-secondary btn-light" type="button">Add</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Torrents List -->
 	<div class="collapse" id="DownloadList">
-		<a href="http://{{$_SERVER['HTTP_HOST']}}:8112" target="_blank">Deluge</a>
-		<table class="table table-striped" id="TorList">
-		</table>
+		<br>
+		<div class="card">
+			<div class="card-body">
+				<a href="http://{{$_SERVER['HTTP_HOST']}}:8112" target="_blank"><span class="oi oi-external-link"></span> Deluge</a>
+				<table class="table table-striped" id="TorList">
+				</table>
+			</div>
+		</div>
+		<br>
 	</div>
 
 	<!-- Large Display Nav -->
