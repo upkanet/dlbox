@@ -34,7 +34,9 @@ $(function(){
 
 function sendAlert(type,message){
 	$("#AlertArea").html('<div id="AlertBox" class="alert alert-'+type+'">'+message+'</div>');
-	$("#AlertBox").animate({"opacity":"toggle"},1500);
+	$("#AlertBox")
+		.animate({ width: "100%" },3000)
+		.animate({"opacity":"toggle"},1500);
 }
 
 function actionMagnet(actionparam){
