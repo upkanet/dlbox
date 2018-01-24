@@ -50,6 +50,16 @@ function addMagnet(){
 	}
 }
 
+function loadSub(dir){
+	var btntxt = 'Load Subtitles';
+	$('#LoadSubBtn').html(btntxt + ' <span class="oi oi-clock"></span>');
+	$.getJSON("sub.php?dir="+dir, function(data){
+		sendAlert(data.type, data.message);
+		$('#LoadSubBtn').html(btntxt);
+		location.reload();
+	});
+}
+
 function deleteMagnet(id,name){
 	if(confirm('Do you really want to delete '+name+' torrent')){
 		actionMagnet('delete&id='+id);

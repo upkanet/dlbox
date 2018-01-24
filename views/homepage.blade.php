@@ -20,7 +20,7 @@
 @section('content')
 	<button id="AddMagnetFormBtn" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#AddMagnet">Add Magnet</button> 
 	<button id="DownloadsBtn" class="btn btn-info" type="button" data-toggle="collapse" data-target="#DownloadList">Downloads (0)</button> 
-	<button class="btn btn-secondary">Load Subtitles</button> 
+	<a id="LoadSubBtn" href="javascript:loadSub('{{$directory->shortpath}}');" class="btn btn-secondary">Load Subtitles</a> 
 	@if(isset($alert))
 	@section('js')
 		@parent
