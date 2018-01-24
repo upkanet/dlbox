@@ -44,7 +44,7 @@ function actionMagnet(actionparam){
 }
 
 function addMagnet(){
-	var mag = $('#AddMangetInp').val();
+	var mag = $('#AddMagnetInp').val();
 	if(mag != "" && mag != null){
 		actionMagnet('add&magnet='+mag);
 	}
