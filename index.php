@@ -33,7 +33,7 @@ function getFreespace(){
 	$shell = shell_exec('df /dev/vda1');
 	$lines = preg_split("/((\r?\n)|(\r\n?))/", $shell);
 	$values = preg_split('/\s+/',$lines[1]);
-	return "Free disk space : " . fFilesize($values[3]*1000)."o (".$values[4].")";
+	return "Free disk space : " . fFilesize($values[3]*1000)."o (".(100-intval(substr($values[4],0,-1)))."%)";
 }
 
 function fFilesize($bytes, $decimals = 1) {
