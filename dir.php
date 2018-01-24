@@ -144,7 +144,7 @@ class File
 		$this->name = $name;
 		$this->basename = $this->name;
 		if(strlen($this->name)>25){
-			$this->shortname = substr($this->name,0,25)."[-]";
+			$this->shortname = substr($this->name,0,25)."...";
 		}
 		else{
 			$this->shortname = $this->name;
