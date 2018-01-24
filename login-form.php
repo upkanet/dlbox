@@ -9,11 +9,12 @@
 			header('Location: index.php');
 		}
 		else{
-			$_SESSION['password'] = null;
+			session_destroy();
 			echo "Wrong password<br>";
 		}
 	}
 	else{
+		session_destroy();
 		$_SESSION['password'] = null;
 	}
 
