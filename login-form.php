@@ -1,5 +1,7 @@
 <?php
 	include('config.php');
+	require 'vendor/autoload.php';
+	use Jenssegers\Blade\Blade;
 	session_start();
 	if(isset($_GET['pw'])){
 		if(password_verify($_GET['pw'],$_CONFIG['password'])){
@@ -15,8 +17,7 @@
 		$_SESSION['password'] = null;
 	}
 
+	$blade = new Blade('views','cache');
+	echo $blade->make('login');
+
 ?>
-<form action="" method="get">
-<h1>Password</h1>
-<input type="password" placeholder="Password" name="pw" id="pw"><input type="submit" value="Log In"/>
-</form>

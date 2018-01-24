@@ -14,6 +14,7 @@
 @section('content')
 	<button id="AddMagnetBtn" class="btn btn-primary">Add Magnet</button> 
 	<button id="DownloadsBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#DownloadList">Downloads (0)</button> 
+	<button class="btn btn-primary">Load Subtitles</button> 
 	@if(isset($alert))
 	@section('js')
 		@parent
