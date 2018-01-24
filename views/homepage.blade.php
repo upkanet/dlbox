@@ -75,7 +75,7 @@
 			@endif
 			<td>
 			@if($f->type == "video")
-				<a href="javascript:showVideo('{{$f->shortpath}}');"><span class="oi oi-video"></span> Watch</a>
+				<a href="javascript:showVideo('{{$f->shortpath}}','{{$f->shortname}}');"><span class="oi oi-video"></span> Watch</a>
 			@endif
 			</td>
 			<td>{{$f->size}}</td>

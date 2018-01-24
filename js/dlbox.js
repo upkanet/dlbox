@@ -5,10 +5,10 @@ function deleteFile(dir,path,basename){
 	}
 }
 
-function showVideo(shortpath){
-	console.log(shortpath);
+function showVideo(shortpath,title){
 	$.get("video.php?v="+shortpath,function(data){
 		$('#videosection').html(data);
+		$('#VideoModalTitle').html(title);
 		$('#VideoModal').modal('toggle');
 	});
 }
