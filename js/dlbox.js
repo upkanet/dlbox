@@ -93,6 +93,9 @@ function updateTorList(){
 			if(t.State == "Downloading"){
 				str += playlink.replace('#ICON#','media-play').replace('#TOGGLE#','pause');
 			}
+			if(t.State == "Seeding"){
+				str += playlink.replace('#ICON#','share').replace('#TOGGLE#','pause');
+			}
 			str += '</td>';
 			str += '<td>'+t.Name+'</td>';
 			str += '<td width="100">';

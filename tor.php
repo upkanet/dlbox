@@ -135,7 +135,12 @@ function cleanTor(&$tor){
 	$tor["dSize"] = iB2o($s[0]);
 	$tor["tSize"] = iB2o($s[1]);
 	unset($tor["Size"]);
-	$tor["Progress"] = floatval(explode("%",$tor["Progress"])[0]);
+	if(isset($tor["Progress"])){
+		$tor["Progress"] = floatval(explode("%",$tor["Progress"])[0]);
+	}
+	else{
+		$tor["Progress"] = 100;
+	}
 	if(isset($tor["Down Speed"])){
 		$tor["Down Speed"] = iB2o($tor["Down Speed"]);
 		$tor["Up Speed"] = iB2o($tor["Up Speed"]);
