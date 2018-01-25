@@ -36,7 +36,9 @@ for ($index = 1; $index < $length; $index++) {
 }
 
 // Show
-for($i = 0; $i < count($lines); $i++){
-	echo $newlines[$i]."\n";
+for($i = 0; $i < count($newlines); $i++){
+	echo $newlines[$i];
+    if(substr($newlines[$i],-1) != "\n"){
+        echo "\n";
+    }
 }
-//print_r($newlines);
