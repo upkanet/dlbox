@@ -9,7 +9,7 @@ if(substr($dir, -1) != "/"){
 }
 
 if(file_exists($dir)){
-	$shell = shell_exec("subliminal download ".$dir." -l fr");
+	$shell = shell_exec("subliminal download ".$dir." -l en");
 	$lines = preg_split("/((\r?\n)|(\r\n?))/", $shell);
 	array_shift($lines);
 	array_pop($lines);
