@@ -33,6 +33,10 @@ switch ($action) {
 		fResume($_GET['id']);
 		break;
 
+	case 'clear':
+		fClear();
+		break;
+
 	default:
 		exit("Unknown action");
 		break;
@@ -56,7 +60,7 @@ function checkMagnet($magnet){
 //Action scripts
 
 //List
-function fList(){
+function fList($json = true){
 	$shell = deluge('info');
 
 	$keys = ["Name","ID","State","Down Speed","Up Speed", "ETA", "Size", "Ratio","Seed time", "Active", "Tracker status", "Progress"];
@@ -85,8 +89,12 @@ function fList(){
 			array_push($torlist,$tor);
 		}
 	}
-
-	echo json_encode($torlist);
+	if($json){
+		echo json_encode($torlist);
+	}
+	else{
+		return $torlist;
+	}
 }
 
 //Add
@@ -103,9 +111,11 @@ function fAdd($magnet){
 }
 
 //Delete
-function fDelete($id){
+function fDelete($id, $verbose = true){
 	$shell = deluge('rm '.$id);
-	alertMessage("success","Torrent deleted",true);
+	if($verbose){
+		alertMessage("success","Torrent deleted",true);
+	}
 }
 
 //Pause
@@ -118,6 +128,17 @@ function fPause($id){
 function fResume($id){
 	$shell = deluge('resume '.$id);
 	alertMessage("success","Torrent resumed",true);
+}
+
+//Clear
+function fClear(){
+	$tl = fList(false);
+	foreach ($tl as $t) {
+		if($t["Progress"] == "100"){
+			fDelete($t["ID"], false);
+			echo date("Y-m-d H:i:s")." [DELETE] ".$t["Name"]."\n";
+		}
+	}
 }
 
 //Helpers
@@ -149,8 +170,7 @@ function cleanTor(&$tor){
 
 function deluge($cmd2){
 	global $cmd;
-	$cmd .= $cmd2;
-	return shell_exec($cmd);	
+	return shell_exec($cmd.$cmd2);	
 }
 
 function iB2o($str){
