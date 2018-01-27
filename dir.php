@@ -37,8 +37,13 @@ class Dir
 		//Files list
 		$this->files = [];
 		$files_array = scandir($this->path);
+		//Remove current folder (".")
 		array_shift($files_array);
+		//Remove parent dir if this is the root directory
 		if($this->isbasedir) array_shift($files_array);
+		//Remove hidden files
+		$files_array = preg_grep('/^([^.])/', $files_array);
+		//Create File object for each path entry
 		foreach($files_array as $fa){
 			$f = new File($fa,$this->path.'/'.$fa,$this->basedir);
 			array_push($this->files, $f);
