@@ -12,7 +12,8 @@ function showVideo(shortpath,title,progress){
 		$('#VideoModal').modal('toggle');
 		if(progress > 1 && progress < 95){
 			var vid = document.getElementById('PlayingVid');
-			vid.oncanplay = function(){
+			vid.onloadedmetadata = function(){
+				console.log('Video onloadedmetadata fired');
 				vid.currentTime = progress / 100 * vid.duration;
 			};
 		}
