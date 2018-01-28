@@ -102,6 +102,9 @@ function updateTorList(){
 			if(t.State == "Seeding"){
 				str += playlink.replace('#ICON#','share').replace('#TOGGLE#','pause');
 			}
+			if(t.State == "Queued"){
+				str += playlink.replace('#ICON#','align-right').replace('#TOGGLE#','pause');
+			}
 			str += '</td>';
 			str += '<td>'+t.Name+'</td>';
 			str += '<td width="100">';
