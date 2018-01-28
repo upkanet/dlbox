@@ -5,11 +5,17 @@ function deleteFile(dir,path,basename){
 	}
 }
 
-function showVideo(shortpath,title){
+function showVideo(shortpath,title,progress){
 	$.get("video.php?v="+shortpath,function(data){
 		$('#videosection').html(data);
 		$('#VideoModalTitle').html(title);
 		$('#VideoModal').modal('toggle');
+		if(progress > 1 && progress < 95){
+			var vid = document.getElementById('PlayingVid');
+			vid.oncanplay = function(){
+				vid.currentTime = progress / 100 * vid.duration;
+			};
+		}
 	});
 }
 

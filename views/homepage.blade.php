@@ -99,14 +99,22 @@
 			<td></td>
 			<td></td>
 		@else
+			<td>
 			@if($f->istvshow)
-				<td><a href="{{$f->shortpath}}" title="{{$f->basename}}"><span class="oi oi-{{$f->icon}}"></span> {{$f->tvshow['name']}} {{$f->tvshow['season']}}x{{$f->tvshow['episode']}}</a></td>
+				<a href="{{$f->shortpath}}" title="{{$f->basename}}"><span class="oi oi-{{$f->icon}}"></span> {{$f->tvshow['name']}} {{$f->tvshow['season']}}x{{$f->tvshow['episode']}}
 			@else
-				<td><a href="{{$f->shortpath}}"><span class="oi oi-{{$f->icon}}"></span> <span class="d-none d-md-inline">{{$f->basename}}</span><span class="d-inline d-md-none">{{$f->shortname}}</span></a></td>
+				<a href="{{$f->shortpath}}"><span class="oi oi-{{$f->icon}}"></span> <span class="d-none d-md-inline">{{$f->basename}}</span><span class="d-inline d-md-none">{{$f->shortname}}</span>
 			@endif
+			</a>
+			@if($f->progress > 1 && $f->progress < 95)
+			<span class="oi oi-media-play"></span>
+			@elseif($f->progress >= 95)
+			<span class="oi oi-check"></span>
+			@endif
+			</td>
 			<td>
 			@if($f->type == "video")
-				<a href="javascript:showVideo('{{$f->shortpath}}','{{$f->shortname}}');"><span class="oi oi-video"></span> Watch</a>
+				<a href="javascript:showVideo('{{$f->shortpath}}','{{$f->shortname}}',{{$f->progress}});"><span class="oi oi-video"></span> Watch</a>
 			@endif
 			</td>
 			<td>{{$f->size}}</td>

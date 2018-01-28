@@ -43,9 +43,15 @@ class Dir
 		if($this->isbasedir) array_shift($files_array);
 		//Remove hidden files
 		$files_array = preg_grep('/^([^.])/', $files_array);
+		//Get track info
+		$tracks = [];
+		if(file_exists($this->path.'/.track')){
+			$tracks = json_decode(file_get_contents($this->path.'/.track'), true);
+		}
 		//Create File object for each path entry
 		foreach($files_array as $fa){
-			$f = new File($fa,$this->path.'/'.$fa,$this->basedir);
+			$prog = $tracks[$fa] ?? 0;
+			$f = new File($fa,$this->path.'/'.$fa,$this->basedir, $prog);
 			array_push($this->files, $f);
 		}
 		$this->sortFiles();
@@ -125,6 +131,7 @@ class File
 	public $size = 0;
 	public $istvshow = false;
 	public $tvshow = [];
+	public $progress;
 
 	public $type = null;
 	private $types = [
@@ -145,7 +152,7 @@ class File
 	];
 
 
-	public function __construct($name,$path,$basedir){
+	public function __construct($name,$path,$basedir,$progress=0){
 		$this->name = $name;
 		$this->basename = $this->name;
 		if(strlen($this->name)>25){
@@ -168,6 +175,7 @@ class File
 			$this->type = $this->getType();
 			$this->icon = $this->getIcon();
 			$this->checkTVShow();
+			$this->progress = $progress;
 		}
 	}
 
