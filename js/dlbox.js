@@ -114,3 +114,17 @@ function updateTorList(){
 		$('#DownloadsBtn').html('Downloads ('+tors.length+')');
 	});
 }
+
+var videotimeupdate = 0;
+
+function updateVidTime(){
+	if(videotimeupdate != Math.floor(Date.now()/30000)){
+		videotimeupdate = Math.floor(Date.now()/30000);
+		var vid = document.getElementById("PlayingVid");
+		var p = Math.round(vid.currentTime/vid.duration*10000)/100;
+		var s = vid.getElementsByTagName('source')[0].getAttribute('src');
+		$.get('track.php?file='+s+'&progress='+p, function(data){
+			
+		});
+	}
+}

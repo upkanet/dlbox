@@ -211,6 +211,10 @@ class File
 		}
 	}
 
+	public function getDir(){
+		return dirname($this->shortpath);
+	}
+
 }
 
 
