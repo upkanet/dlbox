@@ -36,6 +36,7 @@ for ($index = 1; $index < $length; $index++) {
 }
 
 // Show
+header("Content-Type:text/vtt;charset=utf-8");
 for($i = 0; $i < count($newlines); $i++){
 	echo $newlines[$i];
     if(substr($newlines[$i],-1) != "\n"){
