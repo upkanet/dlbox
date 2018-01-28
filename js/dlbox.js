@@ -31,7 +31,6 @@ $(function(){
 		setTimeout(arguments.callee, 3000);
 	})();
 
-	console.log($('#AddMagnetInp').val());
 	if($('#AddMagnetInp').val() != ""){
 		$('#AddMagnet').collapse('show');
 	}
