@@ -19,8 +19,8 @@ $freespace = getFreespace();
 $addmagnet = $_GET['addmagnet'] ?? "";
 
 if(isset($_GET['del'])){
-	$alert = $directory->del($_GET['del']);
-	$directory->loadFiles();
+	$directory->del($_GET['del']);
+	exit();
 }
 echo $blade->make('homepage', [
 	'directory' => $directory, 

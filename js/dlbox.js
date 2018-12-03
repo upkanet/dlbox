@@ -1,7 +1,11 @@
 function deleteFile(dir,path,basename){
 	if(confirm("Do you really want to delete "+basename+" ?")){
 		console.log("Delete " + path + " from " + dir);
-		window.location.href = "?dir="+dir+"&del="+path;
+		//window.location.href = "?dir="+dir+"&del="+path;
+		$.post("http://dl.jdlbox.com/index.php?dir="+dir+"&del="+path,function(data){
+			console.log(data);
+		});
+		window.location.reload();
 	}
 }
 
