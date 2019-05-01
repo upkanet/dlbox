@@ -1,5 +1,5 @@
 <center>
-<video controls preload="metadata" width="470" id="PlayingVid" ontimeupdate="updateVidTime()">
+<video controls preload="metadata" width="100%" id="PlayingVid" ontimeupdate="updateVidTime()">
 	<source src="<?= $_GET['v'] ?? "" ?>" type="video/mp4">
 	<track label="<?php echo subtitles($_GET['v'])['label']; ?>" kind="subtitles" srclang="en" src="<?php echo subtitles($_GET['v'])['path']; ?>" default>
 </video>

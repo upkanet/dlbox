@@ -13,6 +13,7 @@
 @section('content')
     <form action="" method="get">
 	<h1>Password</h1>
+	<input type="text" placeholder="Username" name="un" id="un">
 	<input type="password" placeholder="Password" name="pw" id="pw"><input type="submit" value="Log In">
 	</form>
 @endsection
