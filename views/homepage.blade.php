@@ -114,7 +114,7 @@
 			</td>
 			<td>
 			@if($f->type == "video")
-				<a href="javascript:showVideo('{{$f->shortpath}}','{{$f->shortname}}',{{$f->progress}});"><span class="oi oi-video"></span> Watch</a>
+				<a href="javascript:showVideo('{{addslashes($f->shortpath)}}','{{$f->shortname}}',{{$f->progress}});"><span class="oi oi-video"></span> Watch</a>
 			@endif
 			</td>
 			<td>{{$f->size}}</td>
