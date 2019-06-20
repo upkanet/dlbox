@@ -111,7 +111,7 @@ function updateTorList(){
 				str += playlink.replace('#ICON#','align-right').replace('#TOGGLE#','pause');
 			}
 			str += '</td>';
-			str += '<td>'+t.Name+'</td>';
+			str += '<td><span class="d-none d-md-inline">'+t.Name+'</span><span class="d-inline d-md-none">'+t.Name.substring(0,20)+'...</span></td>';
 			str += '<td width="100">';
 			if(typeof t["Down Speed"] != 'undefined'){
 				str += t["Down Speed"];
