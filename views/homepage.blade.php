@@ -107,14 +107,20 @@
 			@endif
 			</a>
 			@if($f->progress > 1 && $f->progress < 95)
-			<span class="oi oi-media-play"></span>
+			<span class="oi oi-media-play"></span> {{$f->progress}}%
 			@elseif($f->progress >= 95)
 			<span class="oi oi-check"></span>
 			@endif
 			</td>
 			<td>
 			@if($f->type == "video")
-				<a href="javascript:showVideo('{{addslashes($f->shortpath)}}','{{$f->shortname}}',{{$f->progress}});"><span class="oi oi-video"></span> Watch</a>
+				<a href="javascript:showVideo('{{addslashes($f->shortpath)}}',
+				@if($f->istvshow)
+				'{{$f->tvshow['name']}} {{$f->tvshow['season']}}x{{$f->tvshow['episode']}}'
+				@else
+				'{{$f->shortname}}'
+				@endif
+				,{{$f->progress}});"><span class="oi oi-video"></span> Watch</a>
 			@endif
 			</td>
 			<td>{{$f->size}}</td>
