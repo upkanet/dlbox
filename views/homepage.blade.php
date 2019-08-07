@@ -44,6 +44,7 @@
 				<div class="input-group mb-3">
 					<input id="AddMagnetInp" type="text" class="form-control" placeholder="Magnet" aria-label="Magnet" aria-describedby="basic-addon2" value="{{$addmagnet}}">
 					<div class="input-group-append">
+						<button class="btn btn-outline-secondary btn-light" type="button" onclick="$('#AddMagnetInp').val('');"><span class="oi oi-circle-x"></span></button>
 						<button id="AddMagnetBtn" class="btn btn-outline-secondary btn-light" type="button">Add</button>
 					</div>
 				</div>
