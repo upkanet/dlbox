@@ -8,6 +8,66 @@ function deleteFile(dir,path,basename){
 		window.location.reload();
 	}
 }
+document.addEventListener('keypress', videoKeypress);
+
+function videoKeypress(e){
+	var kc = e.keyCode;
+	//console.log(kc);
+	switch(kc){
+		case 102:
+			videoFullscreen();
+			break;
+		case 112:
+			videoToggle();
+			break;
+		case 98:
+			videoBegin();
+			break;
+		case 108:
+			videoBackward();
+			break;
+		case 109:
+			videoForward();
+			break;
+	}
+}
+
+function videoFullscreen(){
+	if(document.fullscreenElement !== null){
+		document.exitFullscreen();
+	}
+	else{
+		var elem = document.getElementById("PlayingVid");
+		elem.requestFullscreen();
+	}
+}
+
+function videoToggle(){
+	var elem = document.getElementById("PlayingVid");
+	if(elem.paused){
+		elem.play();
+	}
+	else{
+		elem.pause();
+	}
+}
+
+function videoBegin(){
+	if(confirm("Retourner au début ?")){
+		var elem = document.getElementById("PlayingVid");
+		elem.currentTime = 0;
+	}
+}
+
+function videoForward(){
+	var elem = document.getElementById("PlayingVid");
+	elem.currentTime = elem.currentTime + 10;
+}
+
+function videoBackward(){
+	var elem = document.getElementById("PlayingVid");
+	elem.currentTime = elem.currentTime - 10;
+}
 
 function showVideo(shortpath,title,progress){
 	$.get("video.php?v="+shortpath,function(data){
