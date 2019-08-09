@@ -29,6 +29,9 @@ function videoKeypress(e){
 		case 109:
 			videoForward();
 			break;
+		case 110:
+			videoNext();
+			break;
 	}
 }
 
@@ -69,11 +72,20 @@ function videoBackward(){
 	elem.currentTime = elem.currentTime - 10;
 }
 
-function showVideo(shortpath,title,progress){
+var nextLink;
+
+function videoNext(){
+	if(confirm("Video suivante ?")){
+		nextLink.trigger('click');
+	}
+}
+
+function showVideo(shortpath,title,progress,domlink){
+	nextLink = $(domlink).parent().parent().nextAll().find(".watchLink").first();
 	$.get("video.php?v="+shortpath,function(data){
 		$('#videosection').html(data);
 		$('#VideoModalTitle').html(title);
-		$('#VideoModal').modal('toggle');
+		$('#VideoModal').modal('show');
 		if(progress > 1 && progress < 95){
 			var vid = document.getElementById('PlayingVid');
 			vid.onloadedmetadata = function(){
