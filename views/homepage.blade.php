@@ -20,7 +20,8 @@
 @section('content')
 	<button id="AddMagnetFormBtn" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#AddMagnet">Add Magnet</button> 
 	<button id="DownloadsBtn" class="btn btn-info" type="button" data-toggle="collapse" data-target="#DownloadList">Downloads (0)</button> 
-	<a id="LoadSubBtn" href="javascript:loadSub('{{$directory->shortpath}}');" class="btn btn-secondary">Load Subtitles</a> 
+	<a id="LoadSubBtn" href="javascript:loadSub('{{$directory->shortpath}}');" class="btn btn-secondary">Load Subtitles</a>
+	<span onclick="showSrt();"><input type="checkbox" id="showsrtcb"> Show SRT</span>
 	@if(isset($alert))
 	@section('js')
 		@parent
@@ -94,7 +95,7 @@
 
 	<table class="table table-striped">
 	@foreach($directory->files as $f)
-		<tr>
+		<tr data-extension="{{$f->extension}}">
 		@if($f->isdir)
 			<td><a href="?dir={{$directory->shortpath}}/{{$f->name}}"><span class="oi oi-folder"></span> <span class="d-none d-md-inline">{{$f->basename}}</span><span class="d-inline d-md-none">{{$f->shortname}}</span></a></td>
 			<td></td>

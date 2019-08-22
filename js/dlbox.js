@@ -111,6 +111,8 @@ $(function(){
 	if($('#AddMagnetInp').val() != ""){
 		$('#AddMagnet').collapse('show');
 	}
+
+	updateSrtCB();
 });
 
 
@@ -212,4 +214,33 @@ function updateVidTime(){
 			
 		});
 	}
+}
+
+
+function showSrt(){
+	var cb = $('#showsrtcb').is(':checked');
+	document.cookie = "showsrt="+cb+"; path=/ ";
+	var srtlines = $("tr[data-extension=srt]");
+	if(cb){
+		srtlines.show();
+	}
+	else{
+		srtlines.hide();
+	}
+	//console.log(cb);
+}
+
+function updateSrtCB(){
+	var cb = $('#showsrtcb');
+	var cbval = (getCookie("showsrt") == "true");
+	//console.log("cookie value :",cbval);
+	cb.prop("checked", cbval);
+	//console.log("checkbox checked :", $('#showsrtcb').is(':checked') );
+	showSrt();
+}
+
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
 }
